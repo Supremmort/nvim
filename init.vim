@@ -136,6 +136,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'bling/vim-bufferline'
 Plug 'dracula/vim', { 'as': 'dracula' }
+Plug 'connorholyday/vim-snazzy'
 
 " Genreal Highlighter
 Plug 'jaxbot/semantic-highlight.vim'
@@ -162,7 +163,9 @@ call plug#end()
 " === Dress my vim
 " ===
 set termguicolors " enable true colors support
-color dracula
+" color dracula
+colorscheme snazzy
+let g:SnazzyTransparent = 1
 
 " ===
 " === Airline
