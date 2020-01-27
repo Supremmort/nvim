@@ -127,6 +127,8 @@ map th <C-w>t<C-w>K
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 
+" Spelling Check with <space>sc
+noremap <LEADER>sc :set spell!<CR>
 
 " vim plug begin
 call plug#begin('~/.config/nvim/plugged')
