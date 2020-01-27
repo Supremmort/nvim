@@ -8,13 +8,13 @@
 " === Auto load for first time uses
 " ===
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-	silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-				\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-let g:python_host_prog='/usr/bin/python2'
-let g:python3_host_prog='/usr/bin/python3'
+let g:python_host_prog  = '/usr/bin/python2'
+let g:python3_host_prog = '/usr/bin/python3'
 
 " ===
 " === Editor behavior
@@ -43,7 +43,7 @@ set softtabstop=4
 set list
 set listchars=tab:▸\ ,trail:▫
 set scrolloff=5
-" set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限  
+" set nocompatible  "去掉讨厌的有关vi一致性模式，避免以前版本的一些bug和局限
 set tw=0
 set indentexpr=
 set backspace=indent,eol,start
@@ -70,8 +70,8 @@ silent !mkdir -p ~/.config/nvim/tmp/sessions
 set backupdir=~/.config/nvim/tmp/backup,.
 set directory=~/.config/nvim/tmp/backup,.
 if has('persistent_undo')
-	set undofile
-	set undodir=~/.config/nvim/tmp/undo,.
+set undofile
+set undodir=~/.config/nvim/tmp/undo,.
 endif
 set colorcolumn=80
 set updatetime=1000
@@ -107,10 +107,10 @@ map <leader>h <C-w>h
 map <leader>k <C-w>k
 map <leader>j <C-w>j
 
-map t<up>	:res -5<CR>
-map t<down>	:res +5<CR>
-map t<left>	:vertical resize+5<CR>
-map t<right>	:vertical resize-5<CR>
+map t<up>   :res -5<CR>
+map t<down> :res +5<CR>
+map t<left> :vertical resize+5<CR>
+map t<right>    :vertical resize-5<CR>
 
 " ===
 " === Tab management
@@ -152,20 +152,50 @@ Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " Snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+" Tex
+Plug 'lervag/vimtex'
+
 " Markdown
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install_sync() }, 'for' :['markdown', 'vim-plug'] }
 Plug 'dhruvasagar/vim-table-mode', { 'on': 'TableModeToggle' }
 
-" Initialize plugin system, vim plug end
+" 注释
+Plug 'preservim/nerdcommenter'
+
+" type yskw' to wrap the word with '' or type cs'` to change 'word' to `word`
+Plug 'tpope/vim-surround' 
+
+"
+Plug 'jiangmiao/auto-pairs'
+
+" Formatter 格式化程序
+Plug 'Chiel92/vim-autoformat'
+
+" gaip= to align the = in paragraph
+Plug 'junegunn/vim-easy-align'
+
+" Other visual enhancement
+Plug 'ryanoasis/vim-devicons' " 图标
+Plug 'luochen1990/rainbow'    " 彩虹括号
+    " Initialize plugin system, vim plug end
 call plug#end()
+
+
+" ===================== Start of Plugin Settings =====================
 
 " ===
 " === Dress my vim
 " ===
 set termguicolors " enable true colors support
+let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+hi NonText ctermfg=gray guifg=grey10
 " color dracula
 colorscheme snazzy
 let g:SnazzyTransparent = 1
+
 
 " ===
 " === Airline
@@ -226,14 +256,14 @@ let g:mkdp_open_ip = ''
 let g:mkdp_echo_preview_url = 0
 let g:mkdp_browserfunc = ''
 let g:mkdp_preview_options = {
-			\ 'mkit': {},
-			\ 'katex': {},
-			\ 'uml': {},
-			\ 'maid': {},
-			\ 'disable_sync_scroll': 0,
-			\ 'sync_scroll_type': 'middle',
-			\ 'hide_yaml_meta': 1
-			\ }
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1
+    \ }
 let g:mkdp_markdown_css = ''
 let g:mkdp_highlight_css = ''
 let g:mkdp_port = ''
@@ -244,8 +274,9 @@ let g:mkdp_page_title = '「${name}」'
 " === vim-table-mode
 " ===
 noremap <LEADER>tm :TableModeToggle<CR>
-"let g:table_mode_disable_mappings = 1
-"let g:table_mode_cell_text_object_i_map = 'k<Bar>'
+let g:table_mode_disable_mappings = 1
+let g:table_mode_cell_text_object_i_map = 'k<Bar>'
+
 
 " ===
 " === coc
@@ -256,18 +287,18 @@ let g:coc_global_extensions = ['coc-python', 'coc-vimlsp', 'coc-html', 'coc-json
 "set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " use <tab> for trigger completion and navigate to the next complete item
 function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]	=~ '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]    =~ '\s'
 endfunction
 inoremap <silent><expr> <Tab>
-			\ pumvisible() ? "\<C-n>" :
-			\ <SID>check_back_space() ? "\<Tab>" :
-			\ coc#refresh()
+    \ pumvisible() ? "\<C-n>" :
+    \ <SID>check_back_space() ? "\<Tab>" :
+    \ coc#refresh()
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 "inoremap <silent><expr> <CR> pumvisible() ? "\<C-y><CR>" : "\<CR>"
 function! s:check_back_space() abort
-	let col = col('.') - 1
-	return !col || getline('.')[col - 1]  =~# '\s'
+    let col = col('.') - 1
+    return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 " Useful commands
@@ -301,3 +332,56 @@ let g:colorizer_syntax = 1
 " ===
 let g:python_highlight_all = 1
 " let g:python_slow_sync = 0
+
+
+" ===
+" === rainbow
+" ===
+let g:rainbow_active = 1
+
+
+" ===
+" === farmatter
+" ===
+nnoremap \f :Autoformat<cr>
+
+
+" ===
+" === vim-easy-align
+" ===
+" Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+
+" ===
+" === Ultisnips
+" ===
+let g:tex_flavor = "latex"
+inoremap <c-n> <nop>
+let g:UltiSnipsExpandTrigger="<c-e>"
+let g:UltiSnipsJumpForwardTrigger="<c-e>"
+let g:UltiSnipsJumpBackwardTrigger="<c-n>"
+let g:UltiSnipsSnippetDirectories = [$HOME.'/.config/nvim/Ultisnips/', 'UltiSnips']
+silent! au BufEnter,BufRead,BufNewFile * silent! unmap <c-r>
+
+
+" ===
+" === vimtex
+" ===
+"let g:vimtex_view_method = ''
+let g:vimtex_view_general_viewer = 'llpp'
+let g:vimtex_mappings_enabled = 0
+let g:vimtex_text_obj_enabled = 0
+let g:vimtex_motion_enabled = 0
+let maplocalleader=' '
+
+
+" ===================== End of Plugin Settings =====================
+
+
+" ===
+" === Necessary Commands to Execute
+" ===
+exec "nohlsearch"
