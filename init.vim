@@ -8,9 +8,9 @@
 " === Auto load for first time uses
 " ===
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
-silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
-\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+    silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
+        \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 let g:python_host_prog  = '/usr/bin/python2'
@@ -25,8 +25,8 @@ set relativenumber
 
 " 显示中文帮助
 if version >= 603
-set helplang=cn
-set encoding=utf-8
+    set helplang=cn
+    set encoding=utf-8
 endif
 
 set nocompatible
@@ -70,8 +70,8 @@ silent !mkdir -p ~/.config/nvim/tmp/sessions
 set backupdir=~/.config/nvim/tmp/backup,.
 set directory=~/.config/nvim/tmp/backup,.
 if has('persistent_undo')
-set undofile
-set undodir=~/.config/nvim/tmp/undo,.
+    set undofile
+    set undodir=~/.config/nvim/tmp/undo,.
 endif
 set colorcolumn=80
 set updatetime=1000
@@ -127,6 +127,8 @@ map th <C-w>t<C-w>K
 " Press space twice to jump to the next '<++>' and edit it
 noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 
+" Spelling Check with <space>sc
+noremap <LEADER>sc :set spell!<CR>
 
 " vim plug begin
 call plug#begin('~/.config/nvim/plugged')
@@ -195,7 +197,6 @@ hi NonText ctermfg=gray guifg=grey10
 " color dracula
 colorscheme snazzy
 let g:SnazzyTransparent = 1
-
 
 " ===
 " === Airline
