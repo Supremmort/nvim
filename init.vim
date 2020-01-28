@@ -386,3 +386,9 @@ let maplocalleader=' '
 " === Necessary Commands to Execute
 " ===
 exec "nohlsearch"
+
+" Source the vimrc file anytime
+noremap <LEADER>rc :source ~/.config/nvim/init.vim<CR>
+
+" autopairs
+noremap <LEADER>ap :call AutoPairsInit()<CR>
