@@ -24,17 +24,15 @@ set number
 set relativenumber
 
 " 显示中文帮助
-if version >= 603
-    set helplang=cn
-    set encoding=utf-8
-endif
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
+set termencoding=utf-8
+set encoding=utf-8
 
 set nocompatible
 filetype on
 filetype indent on
 filetype plugin on
 filetype plugin indent on
-set encoding=utf-8
 let &t_ut=''
 set expandtab
 set tabstop=4
