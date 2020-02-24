@@ -88,6 +88,9 @@ noremap H 5h
 noremap L 5l
 noremap n nzz
 noremap N Nzz
+inoremap vv <esc>la
+inoremap xx <esc>$a
+inoremap jj <esc>
 map Q <esc>:q<CR>
 map W <esc>:w<CR>
 map ; :
@@ -127,6 +130,35 @@ noremap <LEADER><LEADER> <Esc>/<++><CR>:nohlsearch<CR>c4l
 
 " Spelling Check with <space>sc
 noremap <LEADER>sc :set spell!<CR>
+
+" Compile function
+noremap <leader>e :call CompileRun()<CR>
+func! CompileRun()
+        exec "w"
+        if &filetype == "markdown"
+            exec "MarkdownPreview"
+        elseif &filetype == "md"
+            exec "MarkdownPreview"
+        endif
+endfunc
+
+" autocmd Filetype markdown map <leader>w yiWi[<esc>Ea](<esc>pa)
+autocmd Filetype markdown inoremap <buffer> ,f <Esc>/<++><CR>:nohlsearch<CR>"_c4l
+autocmd Filetype markdown inoremap <buffer> ,w <Esc>/ <++><CR>:nohlsearch<CR>"_c5l<CR>
+autocmd Filetype markdown inoremap <buffer> ,n ---<Enter><Enter>
+autocmd Filetype markdown inoremap <buffer> ,b **** <++><Esc>F*hi
+autocmd Filetype markdown inoremap <buffer> ,s ~~~~ <++><Esc>F~hi
+autocmd Filetype markdown inoremap <buffer> ,i ** <++><Esc>F*i
+autocmd Filetype markdown inoremap <buffer> ,d `` <++><Esc>F`i
+autocmd Filetype markdown inoremap <buffer> ,c ```<Enter><++><Enter>```<Enter><Enter><++><Esc>4kA
+autocmd Filetype markdown inoremap <buffer> ,m - [ ] <Enter><++><ESC>kA
+autocmd Filetype markdown inoremap <buffer> ,p ![](<++>) <++><Esc>F[a
+autocmd Filetype markdown inoremap <buffer> ,a [](<++>) <++><Esc>F[a
+autocmd Filetype markdown inoremap <buffer> ,1 #<Space><Enter><++><Esc>kA
+autocmd Filetype markdown inoremap <buffer> ,2 ##<Space><Enter><++><Esc>kA
+autocmd Filetype markdown inoremap <buffer> ,3 ###<Space><Enter><++><Esc>kA
+autocmd Filetype markdown inoremap <buffer> ,4 ####<Space><Enter><++><Esc>kA
+autocmd Filetype markdown inoremap <buffer> ,l --------<Enter>
 
 " vim plug begin
 call plug#begin('~/.config/nvim/plugged')
